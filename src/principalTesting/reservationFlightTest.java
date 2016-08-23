@@ -67,7 +67,7 @@ public class reservationFlightTest {
       driver.findElement(By.id("searchButton")).click();
       
 	 
-    driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_lbtContinue\"]"));
+ //  driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_lbtContinue\"]"));
     		Thread.sleep(5000);
 		//driver.close();
 	}
