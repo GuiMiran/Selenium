@@ -1,17 +1,12 @@
 package principalTesting;
 
-import java.io.IOException;
-import java.sql.Driver;
-import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import library.UtilsFramework;
 
 public class reservationFlightTest {
 
@@ -19,7 +14,7 @@ public class reservationFlightTest {
 		
 
 		 WebDriver driver = new ChromeDriver();
-	//	 String i=null;
+		 String infocurrentPage=null;
 		 
 		driver.get("http://www.norwegian.com/es/");
 		
@@ -66,13 +61,67 @@ public class reservationFlightTest {
       
       driver.findElement(By.id("searchButton")).click();
       
-	 
- //  driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_lbtContinue\"]"));
-    		Thread.sleep(5000);
-		//driver.close();
+      infocurrentPage = driver.getCurrentUrl();
+      System.out.println(infocurrentPage);
+      Thread.sleep(5000);
+      infocurrentPage = driver.getCurrentUrl();
+      System.out.println(infocurrentPage);
+      driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_lbtContinue2\"]")).click();
+            
+      infocurrentPage = driver.getCurrentUrl();
+      System.out.println(infocurrentPage);
+      
+      /////////////////
+      Thread.sleep(6000);
+     
+      driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_lbtContinue\"]")).click();
+      Thread.sleep(5000);
+      infocurrentPage = driver.getCurrentUrl();
+      System.out.println(infocurrentPage);
+      
+      
+      driver.findElement(By.xpath("//*[@id=\"ctl01_ctl00_MainContentRegion_MainRegion_ctl00_IpcResUnregisteredUserBox_btnContinue\"]")).click();
+      Thread.sleep(5000);
+      infocurrentPage = driver.getCurrentUrl();
+      System.out.println(infocurrentPage);
+      
+      //DATOS PASAJERO
+      
+      driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_txtFirstName")).sendKeys("GUIDO");
+      driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_txtLastName")).sendKeys("MIRANDA");
+      
+      /*driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlGender")).click();
+      driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlGender")).sendKeys("Hombre");
+      */
+      
+      WebElement select = driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlGender"));
+      Select dropDown = new Select(select);           
+      String selected = dropDown.getFirstSelectedOption().getText();
+      if(selected.equals("Hombre")){
+          //already selected; 
+          //do stuff
+    	  System.out.println("sleccionado y encontrado>>> HOMBRE");
+      }
+      List<WebElement> Options = dropDown.getOptions();
+      for(WebElement option:Options){
+          if(option.getText().equals("Hombre")) {
+            option.click(); //select option here;       
+          }               
+      }
+      
+      driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlOutboundLuggage")).click();
+      driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlGender")).sendKeys("2 maleta(s) (38,00€)");
+      
+      
+      
+      
+      
+      
+      Thread.sleep(5000);
+    // driver.close();
 	}
 	
-	public static void busquedaMesDiaVuelo(String mes, String dia, WebDriver driver, Boolean retorno) throws Throwable
+	/*public static void busquedaMesDiaVuelo(String mes, String dia, WebDriver driver, Boolean retorno) throws Throwable
 	{
 		 WebElement datepicker =null;
 		 WebElement datepickerBusqueda=null;
@@ -153,6 +202,8 @@ public class reservationFlightTest {
 			  }
 		}
 }
+	
+	*/
 	
 	
 }
