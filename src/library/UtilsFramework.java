@@ -5,8 +5,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class UtilsFramework {
+	
+	
 	public void busquedaMesDiaVuelo(String mes, String dia, WebDriver driver, Boolean retorno) throws Throwable
 	{
 		 WebElement datepicker =null;
@@ -89,7 +92,23 @@ public class UtilsFramework {
 		}
 }
 	
-	
+	public void selectionOption (WebDriver driver, String idSelect, String Value)
+	{
+		WebElement select = driver.findElement(By.id("ctl01_ctl00_MainContentRegion_MainRegion_ctl00_ipcPaxBox_rptTravellers_ctl01_ddlGender"));
+	      Select dropDown = new Select(select);           
+	      String selected = dropDown.getFirstSelectedOption().getText();
+	      if(selected.equals("Hombre")){
+	          //already selected; 
+	          //do stuff
+	    	  System.out.println("sleccionado y encontrado>>> HOMBRE");
+	      }
+	      List<WebElement> Options = dropDown.getOptions();
+	      for(WebElement option:Options){
+	          if(option.getText().equals("Hombre")) {
+	            option.click(); //select option here;       
+	          }               
+	      }
+	}
 }
 
 
